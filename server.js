@@ -10,8 +10,15 @@ app.use(bodyParser.json());
 // ----------------------------------------->
 
 
-// Apply middleware function to this endpoint
+// Apply middleware function to this endpoint only ***>
 app.get('/api/v1/data', (request, response) => {
+
+});
+// ***************************************************>
+
+
+// Do not apply middleware function to this endpoint
+app.get('/api/v1/otherdata', (request, response) => {
 
 });
 
