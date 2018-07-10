@@ -20,7 +20,7 @@ app.locals.pets = [{type: 'rabbit', name: 'Alan'}];
 // 2. Second middleware function (apply to only endpoint POST /pets)
 // Check that there has been information sent in the request body
 // If there is a request body, continue to POST request handler
-// If there is not a request body, do not continue and send 422 response
+// If there is not data in the request body, do not continue and send 422 response
 
 
 
