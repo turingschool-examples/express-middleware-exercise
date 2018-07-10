@@ -28,7 +28,7 @@ app.use(myLogger);
 
 const verifyPostBody = (request, response, next) => {
   if (Object.keys(request.body).length === 0) {
-    response.status(422).send('Provide request body info...');
+    return response.status(422).send('Provide request body info...');
   } else {
     next();
   }
