@@ -1,11 +1,17 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const bodyParser = require('body-parser');
 
 app.set('port', process.env.PORT || 3000);
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(cors())
 
-app.locals.pets = [{type: 'rabbit', name: 'Alan'}];
+app.locals.pets = [
+  { name: 'Lassie', type: 'dog' },
+  { name: 'Felix', type: 'cat' },
+  { name: 'Garfield', type: 'cat' },
+  { name: 'Peter', type: 'rabbit' }
+];
 
 
 // Create middleware functions here ------------------------------------->
@@ -31,12 +37,25 @@ app.locals.pets = [{type: 'rabbit', name: 'Alan'}];
 
 
 app.post('/api/v1/pets', (request, response) => {
-  // Write functionality to add a pet to app.locals.pets and appropriate response
+  const pet = request.body;
+
+  for (let requiredParameter of ['name', 'type']) {
+    if (!pet[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: { name: <String>, type: <String> }. You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  const { name, type } = pet;
+  app.locals.pets.push({ name, type });
+  response.status(201).json({ name, type });
+
 });
 
 
 app.get('/api/v1/pets', (request, response) => {
-  // Write functionality to return all pets in app.locals.pets
+  response.status(200).json(app.locals.pets);
 });
 
 
