@@ -31,6 +31,14 @@ app.locals.pets = [
 
 
 
+// 3. Third middleware function (apply to only endpoint POST /pets)
+// Check that the content-type is application/json
+// If the content-type is correct, continue to the next middleware
+// If the content-type is incorrect, do not continue and send 400 response
+
+
+
+
 // ---------------------------------------------------------------------->
 
 
